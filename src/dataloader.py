@@ -1,11 +1,13 @@
 import os
 import cv2
+import yaml
 import numpy as np
 
 class DatasetLoader:
     def __init__(self, dataset_path):
         self.dataset_path = dataset_path
         self.image_paths = self._get_image_paths()
+        self.sensor_info = self._load_sensor_info()  # Load sensor info
 
         # Initialize the current frame index
         self.current_frame = 0
@@ -20,6 +22,19 @@ class DatasetLoader:
                     image_paths.append(os.path.join(root, file))
 
         return sorted(image_paths)  # Sort for sequential access
+
+    def _load_sensor_info(self):
+        sensor_yaml_path = os.path.join(self.dataset_path, 'sensor.yaml')
+
+        if os.path.isfile(sensor_yaml_path):
+            with open(sensor_yaml_path, 'r') as stream:
+                try:
+                    sensor_info = yaml.safe_load(stream)
+                    return sensor_info
+                except yaml.YAMLError as exc:
+                    print(exc)
+
+        return None
 
     def get_next_frame(self):
         if self.current_frame < len(self.image_paths):
