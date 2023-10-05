@@ -7,3 +7,6 @@ data structure:
 -data/  
 --euroc/  
 ---insert cam0 images here and sensor.yaml
+
+Example:
+python main.py euroc
