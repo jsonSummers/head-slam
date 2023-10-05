@@ -4,7 +4,7 @@ Dataset download [here](http://robotics.ethz.ch/~asl-datasets/ijrr_euroc_mav_dat
 
 data structure:
 
-head-slam
+head-slam  
 -src  
 -data/  
 --euroc/  
