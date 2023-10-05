@@ -4,6 +4,8 @@ Dataset download [here](http://robotics.ethz.ch/~asl-datasets/ijrr_euroc_mav_dat
 
 data structure:
 
+head-slam
+-src  
 -data/  
 --euroc/  
 ---insert cam0 images here and sensor.yaml
