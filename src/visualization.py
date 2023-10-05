@@ -2,7 +2,7 @@ import pygame
 import cv2
 import numpy as np
 
-def display_images_as_video(loader):
+def display_image_with_orb_features(loader):
     camera_info = loader.sensor_info
     if camera_info is None:
         return
@@ -16,14 +16,28 @@ def display_images_as_video(loader):
     running = True
     clock = pygame.time.Clock()
 
+    # Create an ORB detector
+    orb = cv2.ORB_create()
+
     while running:
         frame = loader.get_next_frame()
 
         if frame is not None:
-            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-            frame = pygame.surfarray.make_surface(np.rot90(frame))
+            frame_with_features = frame.copy()
 
-            screen.blit(frame, (0, 0))
+            # Convert the frame to grayscale for ORB detection
+            gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+            # Find ORB keypoints and descriptors
+            keypoints, descriptors = orb.detectAndCompute(gray_frame, None)
+
+            # Draw ORB keypoints on the frame
+            frame_with_features = cv2.drawKeypoints(frame_with_features, keypoints, None, color=(0, 255, 0), flags=0)
+
+            frame_with_features = cv2.cvtColor(frame_with_features, cv2.COLOR_BGR2RGB)
+            frame_with_features = pygame.surfarray.make_surface(np.rot90(frame_with_features))
+
+            screen.blit(frame_with_features, (0, 0))
             pygame.display.flip()
 
             for event in pygame.event.get():
