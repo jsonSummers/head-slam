@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 
+
 class Camera:
     def __init__(self, camera_matrix):
         self.camera_matrix = camera_matrix
@@ -10,6 +11,7 @@ class Camera:
     def update_pose(self, rotation_matrix, translation_vector):
         self.rotation_matrix = rotation_matrix
         self.translation_vector = translation_vector
+
 
 def estimate_camera_pose(keypoints1, keypoints2, matches, camera):
     # Convert keypoints to format needed by solvePnP
@@ -33,4 +35,3 @@ def estimate_camera_pose(keypoints1, keypoints2, matches, camera):
     camera.update_pose(rotation_matrix, tvec)
 
     return rotation_matrix, tvec
-

@@ -7,7 +7,8 @@ class DatasetLoader:
     def __init__(self, dataset_path):
         self.dataset_path = dataset_path
         self.image_paths = self._get_image_paths()
-        self.sensor_info = self._load_sensor_info()  # Load sensor info
+        self.sensor_info = self._load_sensor_info()
+        self.camera_matrix = self._get_camera_matrix()
 
         # Initialize the current frame index
         self.current_frame = 0
@@ -39,6 +40,22 @@ class DatasetLoader:
 
         return None
 
+    def _get_camera_matrix(self):
+        sensor_info = self._load_sensor_info()
+
+        if sensor_info and 'intrinsics' in sensor_info:
+            intrinsics = sensor_info['intrinsics']
+            fu, fv, cu, cv = intrinsics
+
+            # Construct the camera matrix K
+            K = np.array([[fu, 0, cu],
+                          [0, fv, cv],
+                          [0, 0, 1]], dtype=np.float32)
+
+            return K
+
+        return None
+
     def get_current_frame(self):
         return self.current_frame
 
@@ -55,18 +72,14 @@ class DatasetLoader:
         else:
             return None
 
-    def load_3_frames(self):
+    def load_2_frames(self):
         print(self.current_frame)
-        if self.current_frame < (len(self.image_paths) - 2):
+        if self.current_frame < (len(self.image_paths) - 1):
             image_path = self.image_paths[self.current_frame]
             image1 = cv2.imread(image_path)
-            print(self.current_frame)
             image2 = self.get_next_frame()
-            print(self.current_frame)
-            image3 = self.get_next_frame()
-            print(self.current_frame)
-            self.current_frame += -2
-            return image1, image2, image3
+            self.current_frame += -1
+            return image1, image2
         else:
             return None
 

@@ -12,27 +12,26 @@ def extract_orb_features(image):
     return keypoints, descriptors
 
 
-def extract_and_match_features(image1, image2, image3):
+def extract_and_match_features(image1, image2):
     # Initialize ORB detector
     orb = cv2.ORB_create()
 
     # Detect ORB features and compute descriptors for all three frames
     keypoints1, descriptors1 = extract_orb_features(image1)
     keypoints2, descriptors2 = extract_orb_features(image2)
-    keypoints3, descriptors3 = extract_orb_features(image3)
+
 
     # Create a BFMatcher (Brute-Force Matcher) with default params
     bf = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck=True)
 
     matches12 = bf.match(descriptors1, descriptors2)
-    matches23 = bf.match(descriptors2, descriptors3)
+
 
     ransac_threshold = 5.0  # Adjust this threshold as needed
-    keypoints1, keypoints2, matches12 = apply_ransac(keypoints1, keypoints2, matches12, ransac_threshold)
-    keypoints2, keypoints3, matches23 = apply_ransac(keypoints2, keypoints3, matches23, ransac_threshold)
+    keypoints1, keypoints2, matches = apply_ransac(keypoints1, keypoints2, matches12, ransac_threshold)
 
     # Return the keypoints and matches
-    return keypoints1, keypoints2, keypoints3, matches12, matches23
+    return keypoints1, keypoints2, matches
 
 
 def apply_ransac(keypoints1, keypoints2, matches, ransac_threshold):

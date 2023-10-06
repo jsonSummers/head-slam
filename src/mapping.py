@@ -18,10 +18,10 @@ class Map:
     def add_observation(self, point_id, frame_id, keypoint_id):
         self.points[point_id].add_observation(frame_id, keypoint_id)
 
-def triangulate_points(keypoints1, keypoints2, camera_matrix, rotation_matrix1, tvec1, rotation_matrix2, tvec2):
-    # Convert keypoints to homogeneous coordinates
-    points1 = np.array([kp.pt + (1,) for kp in keypoints1])
-    points2 = np.array([kp.pt + (1,) for kp in keypoints2])
+def triangulate_points(keypoints1, keypoints2, matches, camera_matrix, rotation_matrix1, tvec1, rotation_matrix2, tvec2):
+    # Convert matches to homogeneous coordinates
+    points1 = np.array([keypoints1[match.queryIdx].pt + (1,) for match in matches])
+    points2 = np.array([keypoints2[match.trainIdx].pt + (1,) for match in matches])
 
     # Construct the projection matrices
     projection_matrix1 = np.dot(camera_matrix, np.hstack((rotation_matrix1, tvec1)))
@@ -29,6 +29,6 @@ def triangulate_points(keypoints1, keypoints2, camera_matrix, rotation_matrix1, 
 
     # Triangulate the 3D points
     points4d = cv2.triangulatePoints(projection_matrix1, projection_matrix2, points1.T, points2.T)
-    points3d = points4d[:3] / points4d[3]
+    points3d = (points4d[:3] / points4d[3]).T  # Transpose for correct shape
 
     return points3d
