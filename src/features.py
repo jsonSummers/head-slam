@@ -43,6 +43,7 @@ def apply_ransac(keypoints1, keypoints2, matches, ransac_threshold):
     M, mask = cv2.findHomography(src_pts, dst_pts, cv2.RANSAC, ransac_threshold)
 
     # Apply mask to keep only inliers
+
     inlier_matches = [matches[i] for i in range(len(matches)) if mask[i] == 1]
 
     # Update keypoints based on inliers

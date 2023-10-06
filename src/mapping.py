@@ -19,6 +19,14 @@ class Map:
         self.points[point_id].add_observation(frame_id, keypoint_id)
 
 def triangulate_points(keypoints1, keypoints2, matches, camera_matrix, rotation_matrix1, tvec1, rotation_matrix2, tvec2):
+    #testing:
+    print("Length of keypoints1:", len(keypoints1))
+    print("Length of matches:", len(matches))
+    for match in matches:
+        if match.queryIdx >= len(keypoints1):
+            print("Invalid match.queryIdx:", match.queryIdx)
+
+
     # Convert matches to homogeneous coordinates
     points1 = np.array([keypoints1[match.queryIdx].pt + (1,) for match in matches])
     points2 = np.array([keypoints2[match.trainIdx].pt + (1,) for match in matches])

@@ -19,7 +19,7 @@ def estimate_camera_pose(keypoints1, keypoints2, matches, camera):
     img_points = []  # Corresponding 2D image points
 
     for match in matches:
-        obj_points.append(match.point3d)  # You'll need to populate point3d during triangulation
+        obj_points.append(match.point3d)
         img_points.append(keypoints2[match.trainIdx].pt)
 
     obj_points = np.array(obj_points, dtype=np.float32)

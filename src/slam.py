@@ -3,6 +3,7 @@ import numpy as np
 from localization import estimate_camera_pose
 from features import extract_and_match_features
 from mapping import triangulate_points
+from features import apply_ransac
 
 
 def run_slam(loader, map, camera):
@@ -26,12 +27,19 @@ def run_slam(loader, map, camera):
         # Extract and match features between the current frame and the previous one
         keypoints1, keypoints2, matches = extract_and_match_features(frame_sequence[-1], frame)
 
+        # Use RANSAC to filter out invalid matches
+        ransac_threshold = 5.0  # Adjust as needed
+        keypoints1, keypoints2, matches = apply_ransac(keypoints1, keypoints2, matches, ransac_threshold)
+
+        points3d = triangulate_points(keypoints1, keypoints2, matches, camera.camera_matrix,
+                                      np.eye(3), np.zeros((3, 1)), np.eye(3), np.zeros((3, 1)))
+
         # Estimate camera pose
         rotation_matrix, tvec = estimate_camera_pose(keypoints1, keypoints2, matches, camera)
 
         # Triangulate 3D points between the current and previous frames
-        points3d = triangulate_points(keypoints1, keypoints2, matches, camera.camera_matrix,
-                                      np.eye(3), np.zeros((3, 1)), rotation_matrix, tvec)
+        #points3d = triangulate_points(keypoints1, keypoints2, matches, camera.camera_matrix,
+                                      #np.eye(3), np.zeros((3, 1)), rotation_matrix, tvec)
         print("3d  done")
         print(len(points3d))
         # Add the triangulated points to the map
