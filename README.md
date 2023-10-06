@@ -6,11 +6,11 @@ cd head-slam
 chmod +x download_dataset.sh  
 
 ### Creating the environment
-conda create -n head-slam python=3.8 numpy=1.23 -y
-conda activate head-slam
-conda install -c "conda-forge/label/cf201901" opencv -y
-python3 -m pip install pygame
-python3 -m pip install pyyaml
+conda create -n head-slam python=3.8 numpy=1.23 -y  
+conda activate head-slam  
+conda install -c "conda-forge/label/cf201901" opencv -y  
+python3 -m pip install pygame  
+python3 -m pip install pyyaml  
 
 
 conda env create -f environment.yaml  
