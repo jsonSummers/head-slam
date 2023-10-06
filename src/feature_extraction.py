@@ -8,3 +8,4 @@ def extract_orb_features(image):
     keypoints, descriptors = orb.detectAndCompute(image, None)
 
     return keypoints, descriptors
+

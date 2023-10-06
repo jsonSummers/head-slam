@@ -1,6 +1,7 @@
 import pygame
 import cv2
 import numpy as np
+from feature_extraction import extract_orb_features
 
 def display_image_with_orb_features(loader):
     camera_info = loader.sensor_info
@@ -16,9 +17,6 @@ def display_image_with_orb_features(loader):
     running = True
     clock = pygame.time.Clock()
 
-    # Create an ORB detector
-    orb = cv2.ORB_create()
-
     while running:
         frame = loader.get_next_frame()
 
@@ -28,8 +26,8 @@ def display_image_with_orb_features(loader):
             # Convert the frame to grayscale for ORB detection
             gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-            # Find ORB keypoints and descriptors
-            keypoints, descriptors = orb.detectAndCompute(gray_frame, None)
+            # Extract ORB keypoints and descriptors using the feature extraction function
+            keypoints, descriptors = extract_orb_features(gray_frame)
 
             # Draw ORB keypoints on the frame
             frame_with_features = cv2.drawKeypoints(frame_with_features, keypoints, None, color=(0, 255, 0), flags=0)
