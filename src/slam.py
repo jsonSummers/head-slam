@@ -1,19 +1,18 @@
 import cv2
 import numpy as np
-from feature_extraction import extract_orb_features
+from features import extract_and_match_features
 
 def run_slam(loader):
     camera_info = loader.sensor_info
     resolution = camera_info.get('resolution', [752, 480])
     rate_hz = camera_info.get('rate_hz', 20)
-    print("camera information loaded")
+
     running = True
 
     while running:
-        frame1, frame2, frame3 = loader.load_3_frames()
+        image1, image2, image3 = loader.load_3_frames()
+        extract_and_match_features(image1, image2, image3)
         print("3 frames loaded")
-        loader.get_next_frame()
-        frame4, frame5, frame6 = loader.load_3_frames()
 
         running = False
 '''

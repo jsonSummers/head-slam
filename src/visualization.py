@@ -1,7 +1,7 @@
 import pygame
 import cv2
 import numpy as np
-from feature_extraction import extract_orb_features
+from features import extract_orb_features
 
 def display_image_with_orb_features(loader):
     camera_info = loader.sensor_info
