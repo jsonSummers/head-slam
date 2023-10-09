@@ -1,6 +1,6 @@
 import os
 import argparse
-import pygame
+#import pygame
 import numpy as np
 import cv2
 import yaml
@@ -9,6 +9,7 @@ from mapping import Map
 from localization import Camera
 from visualization import display_image_with_orb_features
 from slam import run_slam
+from test import test
 
 def main(dataset_name):
     # Initialize the dataset loader
@@ -22,8 +23,8 @@ def main(dataset_name):
     camera= Camera(loader.camera_matrix)
 
     #display_image_with_orb_features(loader)
-
-    run_slam(loader, map, camera)
+    test(loader, map, camera)
+    #run_slam(loader, map, camera)
 
 
 

@@ -4,9 +4,7 @@ from localization import estimate_camera_pose
 from features import extract_and_match_features
 from mapping import triangulate_points
 
-
-
-def run_slam(loader, map, camera):
+def test(loader, map, camera):
     frame_sequence = []
 
     # Load the first frame
@@ -27,10 +25,10 @@ def run_slam(loader, map, camera):
         # Extract and match features between the current frame and the previous one
         keypoints1, keypoints2, matches = extract_and_match_features(frame_sequence[-1], frame)
 
-        #print(dir(keypoints1))
-        #print(type(keypoints1[0]))
-        #print(dir(matches))
-        #print(type(matches[0]))
+        print(dir(keypoints1))
+        print(type(keypoints1[0]))
+        print(dir(matches))
+        print(type(matches[0]))
 
         initial_rotation = np.eye(3)  # Identity rotation matrix
         initial_translation = np.zeros((3, 1))  # Zero translation vector
@@ -40,13 +38,8 @@ def run_slam(loader, map, camera):
                                       initial_rotation, initial_translation,
                                       initial_rotation, initial_translation)
 
-        print("triangulation complete")
-        # Estimate camera pose
         rotation_matrix, tvec = estimate_camera_pose(keypoints1, keypoints2, matches, camera)
 
-        print("3d  done")
-        print(len(points3d))
-        # Add the triangulated points to the map
         for point3d, match in zip(points3d, matches):
             match.point3d = point3d  # Populate point3d attribute for the match
             map.add_point(point3d)
@@ -56,3 +49,5 @@ def run_slam(loader, map, camera):
 
         # Append the current frame to the frame sequence
         frame_sequence.append(frame)
+
+        running = False

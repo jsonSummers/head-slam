@@ -26,7 +26,7 @@ def extract_and_match_features(image1, image2):
     # Match descriptors from image1 to image2
     matches = bf.match(descriptors1, descriptors2)
 
-    ransac_threshold = 5.0  # Adjust this threshold as needed
+    ransac_threshold = 100.0  # Adjust this threshold as needed
     filtered_keypoints1, filtered_keypoints2, filtered_matches = apply_ransac(keypoints1, keypoints2, matches,
                                                                               ransac_threshold)
 

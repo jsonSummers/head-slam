@@ -20,6 +20,7 @@ def estimate_camera_pose(keypoints2, filtered_matches, camera, triangulated_poin
 
     for match in filtered_matches:
         # Get the index of the corresponding triangulated point
+        print(dir(match))
         query_idx = match.queryIdx
         train_idx = match.trainIdx
 
