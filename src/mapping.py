@@ -1,4 +1,5 @@
 import numpy as np
+import cv2
 
 class MapPoint:
     def __init__(self, point3d):
@@ -7,6 +8,7 @@ class MapPoint:
 
     def add_observation(self, frame_id, keypoint_id):
         self.observations.append((frame_id, keypoint_id))
+
 
 class Map:
     def __init__(self):
@@ -17,6 +19,8 @@ class Map:
 
     def add_observation(self, point_id, frame_id, keypoint_id):
         self.points[point_id].add_observation(frame_id, keypoint_id)
+
+
 
 def triangulate_points(keypoints1, keypoints2, matches, camera_matrix, rotation_matrix1, tvec1, rotation_matrix2, tvec2):
     valid_matches = []  # To store valid matches

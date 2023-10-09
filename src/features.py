@@ -27,12 +27,8 @@ def extract_and_match_features(image1, image2):
     matches = bf.match(descriptors1, descriptors2)
 
     ransac_threshold = 5.0  # Adjust this threshold as needed
-    filtered_keypoints1, filtered_keypoints2, filtered_matches = apply_ransac(keypoints1, keypoints2, matches, ransac_threshold)
-
-    print("Number of matches before RANSAC:", len(matches))
-    print("Number of matches after RANSAC:", len(filtered_matches))
-    for i in range(min(5, len(filtered_matches))):
-        print("Match", i, "queryIdx:", filtered_matches[i].queryIdx, "trainIdx:", filtered_matches[i].trainIdx)
+    filtered_keypoints1, filtered_keypoints2, filtered_matches = apply_ransac(keypoints1, keypoints2, matches,
+                                                                              ransac_threshold)
 
     # Return the keypoints and filtered_matches
     return filtered_keypoints1, filtered_keypoints2, filtered_matches

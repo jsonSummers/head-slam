@@ -13,17 +13,19 @@ class Camera:
         self.translation_vector = translation_vector
 
 
-def estimate_camera_pose(keypoints2, matches, camera, triangulated_points):
+def estimate_camera_pose(keypoints2, filtered_matches, camera, triangulated_points):
     # Convert keypoints to format needed by solvePnP
     obj_points = []  # 3D world points
     img_points = []  # Corresponding 2D image points
 
-    for match in matches:
+    for match in filtered_matches:
         # Get the index of the corresponding triangulated point
-        triangulated_idx = match.queryIdx
-        if triangulated_idx < len(triangulated_points):
-            obj_points.append(triangulated_points[triangulated_idx])
-            img_points.append(keypoints2[match.trainIdx].pt)
+        query_idx = match.queryIdx
+        train_idx = match.trainIdx
+
+        if query_idx < len(triangulated_points):
+            obj_points.append(triangulated_points[query_idx])
+            img_points.append(keypoints2[train_idx].pt)
 
     obj_points = np.array(obj_points, dtype=np.float32)
     img_points = np.array(img_points, dtype=np.float32)
