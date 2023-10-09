@@ -16,5 +16,5 @@ python3 -m pip install pyyaml
 conda env create -f environment.yaml  
 conda activate head-slam  
 
-Example:
+Example bash:  
 python main.py euroc
