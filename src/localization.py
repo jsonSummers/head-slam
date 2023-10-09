@@ -17,10 +17,12 @@ def estimate_camera_pose(keypoints2, filtered_matches, camera, triangulated_poin
     # Convert keypoints to format needed by solvePnP
     obj_points = []  # 3D world points
     img_points = []  # Corresponding 2D image points
+    print('beginning estimate camera')
+    print(dir(filtered_matches[0]))
+    print(type(filtered_matches[0]))
 
     for match in filtered_matches:
         # Get the index of the corresponding triangulated point
-        print(dir(match))
         query_idx = match.queryIdx
         train_idx = match.trainIdx
 

@@ -42,7 +42,7 @@ def run_slam(loader, map, camera):
 
         print("triangulation complete")
         # Estimate camera pose
-        rotation_matrix, tvec = estimate_camera_pose(keypoints1, keypoints2, matches, camera)
+        rotation_matrix, tvec = estimate_camera_pose(keypoints1, matches, camera, points3d)
 
         print("3d  done")
         print(len(points3d))
