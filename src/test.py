@@ -27,9 +27,7 @@ def test(loader, map, camera):
 
         #print(dir(keypoints1))
         #print(type(keypoints1[0]))
-        print(dir(matches[0]))
-        print(type(matches[0]))
-        print("break\n")
+
         initial_rotation = np.eye(3)  # Identity rotation matrix
         initial_translation = np.zeros((3, 1))  # Zero translation vector
 

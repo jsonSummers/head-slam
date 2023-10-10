@@ -1,6 +1,6 @@
 import os
 import argparse
-#import pygame
+# import pygame
 import numpy as np
 import cv2
 import yaml
@@ -11,6 +11,7 @@ from visualization import display_image_with_orb_features
 from slam import run_slam
 from test import test
 
+
 def main(dataset_name):
     # Initialize the dataset loader
     dataset_path = os.path.join("../data/", dataset_name)
@@ -20,12 +21,11 @@ def main(dataset_name):
     rate_hz = camera_info.get('rate_hz', 20)
 
     map = Map()
-    camera= Camera(loader.camera_matrix)
+    camera = Camera(loader.camera_matrix)
 
-    #display_image_with_orb_features(loader)
+    # display_image_with_orb_features(loader)
     test(loader, map, camera)
-    #run_slam(loader, map, camera)
-
+    # run_slam(loader, map, camera)
 
 
 if __name__ == "__main__":
