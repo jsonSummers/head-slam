@@ -30,25 +30,29 @@ def triangulate_points(keypoints1, keypoints2, matches, camera_matrix, rotation_
         query_idx = match.queryIdx
         train_idx = match.trainIdx
 
-        if query_idx < len(keypoints1) and train_idx < len(keypoints2):
-            # Convert matches to homogeneous coordinates
-            point1 = keypoints1[query_idx].pt + (1,)
-            point2 = keypoints2[train_idx].pt + (1,)
+        # Convert valid matches to NumPy arrays
+        point1 = np.array(keypoints1[query_idx].pt, dtype=np.float32)
+        point2 = np.array(keypoints2[train_idx].pt, dtype=np.float32)
 
-            valid_matches.append((point1, point2))
+        valid_matches.append((point1, point2))
 
-    if not valid_matches:
+    if len(valid_matches) < 8:
+        # Not enough valid matches for triangulation
         print("No valid matches for triangulation.")
         return None
 
     # Convert valid matches to NumPy arrays
-    points1 = np.array([match[0][:2] for match in valid_matches], dtype=np.float32).T
-    points2 = np.array([match[1][:2] for match in valid_matches], dtype=np.float32).T
+    points1 = np.array([match[0] for match in valid_matches], dtype=np.float32).T
+    points2 = np.array([match[1] for match in valid_matches], dtype=np.float32).T
 
+    # Ensure camera_matrix is a matrix
+    camera_matrix = np.array(camera_matrix, dtype=np.float32)
+
+    # Projection matrices
     projection_matrix1 = np.dot(camera_matrix, np.hstack((rotation_matrix1, tvec1)))
     projection_matrix2 = np.dot(camera_matrix, np.hstack((rotation_matrix2, tvec2)))
 
-    # Ensure data is in float32 format
+    # Ensure projection matrices are matrices
     projection_matrix1 = np.array(projection_matrix1, dtype=np.float32)
     projection_matrix2 = np.array(projection_matrix2, dtype=np.float32)
 
