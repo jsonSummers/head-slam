@@ -23,8 +23,11 @@ def main(dataset_name):
     map = Map()
     camera = Camera(loader.camera_matrix)
 
+    ### INSERT LOOP HERE
+
+    #display_image_with_orb_features(loader)
     # display_image_with_orb_features(loader)
-    test(loader, map, camera)
+    #test(loader, map, camera)
     # run_slam(loader, map, camera)
 
 

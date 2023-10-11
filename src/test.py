@@ -47,22 +47,17 @@ def test(loader, map, camera):
                                       camera.rotation_matrix, camera.translation_vector,
                                       camera.rotation_matrix, camera.translation_vector)
 
-        print(f'Number of filtered matches: {len(matches)}')
-        print(f'Number of triangulated points: {len(points3d)}')
-
         rotation_matrix, tvec = estimate_camera_pose(keypoints1, matches, camera, points3d)
 
         print(rotation_matrix)
-
-        for point3d, match in zip(points3d, matches):
-            match.point3d = point3d  # Populate point3d attribute for the match
-            map.add_point(point3d)
+        for point in points3d:
+            map.add_point(points3d)
 
 
 
         # Update the camera's pose
         camera.update_pose(rotation_matrix, tvec)
-
+        break
         # Append the current frame to the frame sequence
         frame_sequence.append(frame)
 
