@@ -2,6 +2,9 @@ import pygame
 import cv2
 import numpy as np
 from features import extract_orb_features
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+
 
 def display_image_with_orb_features(loader):
     camera_info = loader.sensor_info

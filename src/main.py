@@ -28,7 +28,7 @@ def main(dataset_name):
     #display_image_with_orb_features(loader)
     # display_image_with_orb_features(loader)
     #test(loader, map, camera)
-    # run_slam(loader, map, camera)
+    run_slam(loader, map, camera)
 
 
 if __name__ == "__main__":
