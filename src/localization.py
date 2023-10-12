@@ -26,7 +26,6 @@ class Camera:
             return np.eye(3), np.zeros((3, 1))
 
 
-
 def estimate_camera_pose(keypoints2, matches, camera, triangulated_points):
     # Convert keypoints to format needed by solvePnP
     obj_points = []  # 3D world points

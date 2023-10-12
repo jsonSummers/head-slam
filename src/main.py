@@ -9,7 +9,7 @@ from mapping import Map
 from localization import Camera
 from visualization import display_image_with_orb_features
 from slam import run_slam
-from test import test
+from test import run_test
 
 
 def main(dataset_name):
@@ -23,7 +23,7 @@ def main(dataset_name):
     map = Map()
     camera = Camera(loader.camera_matrix)
 
-
+    #run_test(loader, map, camera)
     run_slam(loader, map, camera)
 
 

@@ -4,6 +4,7 @@ from localization import estimate_camera_pose
 from features import extract_and_match_features
 from mapping import triangulate_points
 from visualization import initialize_windows, display_image_with_orb_features, display_map
+import pygame
 
 
 def run_slam(loader, map, camera):
@@ -19,7 +20,7 @@ def run_slam(loader, map, camera):
     running = True
 
     resolution = first_frame.shape[1], first_frame.shape[0]
-    screen_video, screen_map = initialize_windows(resolution)
+    screen, screen_video, screen_map = initialize_windows(resolution)
 
     while running:
         print("Frame: ", run)
@@ -49,6 +50,12 @@ def run_slam(loader, map, camera):
         frame_sequence.append(frame)
 
         display_image_with_orb_features(frame, screen_video, keypoints1, matches)
-        #display_map(map.get_map_image(), screen_map)
+        display_map(screen_map, map, camera.camera_matrix, camera.rotation_matrix, camera.translation_vector)
+
+
+        # Blit the video and map surfaces side by side onto the main Pygame window
+        screen.blit(screen_video, (0, 0))
+        screen.blit(screen_map, (resolution[0], 0))
+        pygame.display.flip()
 
         run += 1
