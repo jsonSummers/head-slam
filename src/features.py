@@ -33,7 +33,7 @@ def extract_and_match_features(image1, image2):
 
     # You can adjust the RANSAC parameters (e.g., 3 for minimum number of points, 0.8 for the maximum reprojection
     # error).
-    ransac_threshold = 0.8
+    ransac_threshold = 3.0
     M, mask = cv2.findHomography(src_pts, dst_pts, cv2.RANSAC, ransac_threshold)
     good_matches = [matches[i] for i in range(len(matches)) if mask[i] == 1]
 

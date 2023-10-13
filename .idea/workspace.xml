@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="af7951da-f1b2-42d1-9d0d-364f5c42b9ac" name="Changes" comment="started viz loop">
+    <list default="true" id="af7951da-f1b2-42d1-9d0d-364f5c42b9ac" name="Changes" comment="trying to make it run for entire video">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/features.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/localization.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/localization.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/slam.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/slam.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/visualization.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/visualization.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,7 +26,6 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -56,7 +52,7 @@
       <option name="presentableId" value="Default" />
       <updated>1696578095677</updated>
       <workItem from="1696578096925" duration="48605000" />
-      <workItem from="1697013439111" duration="14680000" />
+      <workItem from="1697013439111" duration="19185000" />
     </task>
     <task id="LOCAL-00001" summary="I think github has finally realised it can commit slam.py">
       <created>1696578445559</created>
@@ -184,7 +180,14 @@
       <option name="project" value="LOCAL" />
       <updated>1697029485843</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="trying to make it run for entire video">
+      <created>1697121172003</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1697121172003</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -215,7 +218,8 @@
     <MESSAGE value="rotation matrix can be calculated" />
     <MESSAGE value="started loop" />
     <MESSAGE value="started viz loop" />
-    <option name="LAST_COMMIT_MESSAGE" value="started viz loop" />
+    <MESSAGE value="trying to make it run for entire video" />
+    <option name="LAST_COMMIT_MESSAGE" value="trying to make it run for entire video" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/head_slam$slam.coverage" NAME="slam Coverage Results" MODIFIED="1696854308604" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
