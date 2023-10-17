@@ -10,6 +10,7 @@ from localization import Camera
 from visualization import display_image_with_orb_features
 from slam import run_slam
 from test import run_test
+from initialize import initialize
 
 
 def main(dataset_name):
@@ -20,10 +21,12 @@ def main(dataset_name):
     resolution = camera_info.get('resolution', [752, 480])
     rate_hz = camera_info.get('rate_hz', 20)
 
-    map = Map()
-    camera = Camera(loader.camera_matrix)
+    # map = Map()
+    # camera = Camera(loader.camera_matrix)
 
-    #run_test(loader, map, camera)
+    map, camera = initialize(loader, Map(), Camera(loader.camera_matrix), 3)
+
+    # run_test(loader, map, camera)
     run_slam(loader, map, camera)
 
 

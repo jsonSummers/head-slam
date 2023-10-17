@@ -22,7 +22,6 @@ def initialize_windows(resolution):
     return screen, screen_video, screen_map
 
 
-
 def display_image_with_orb_features(frame, screen_video, keypoints, matches):
     # Visualize the video frame with ORB features
     frame_with_features = frame.copy()
@@ -88,26 +87,6 @@ def map_point_to_map_coordinates(point3d, camera_matrix, rotation_matrix, transl
     x, y = point2d_normalized[:2]
 
     return int(x), int(y)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 def display_image_with_orb_features__old(loader):

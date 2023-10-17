@@ -38,7 +38,7 @@ def run_slam(loader, map, camera):
         points3d = triangulate_points(keypoints1, keypoints2, matches, camera.camera_matrix,
                                       prev_rotation_matrix, prev_translation_vector,
                                       camera.rotation_matrix, camera.translation_vector)
-
+        print(points3d)
         rotation_matrix, tvec = estimate_camera_pose(keypoints1, matches, camera, points3d)
 
         # print(rotation_matrix)
@@ -50,7 +50,7 @@ def run_slam(loader, map, camera):
         frame_sequence.append(frame)
 
         display_image_with_orb_features(frame, screen_video, keypoints1, matches)
-        display_map(screen_map, map, camera.camera_matrix, camera.rotation_matrix, camera.translation_vector)
+        #display_map(screen_map, map, camera.camera_matrix, camera.rotation_matrix, camera.translation_vector)
 
 
         # Blit the video and map surfaces side by side onto the main Pygame window
