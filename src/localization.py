@@ -2,30 +2,6 @@ import cv2
 import numpy as np
 
 
-class Camera:
-    def __init__(self, camera_matrix):
-        self.camera_matrix = camera_matrix
-        self.rotation_matrix = np.eye(3)  # Initialize with identity matrix
-        self.translation_vector = np.zeros((3, 1))  # Initialize with zeros
-        self.pose_history = []  # Initialize an empty list to store camera poses
-
-    def update_pose(self, rotation_matrix, translation_vector):
-        self.rotation_matrix = rotation_matrix
-        self.translation_vector = translation_vector
-
-        # Store the current pose in the history
-        self.pose_history.append((self.rotation_matrix, self.translation_vector))
-
-    def get_previous_pose(self):
-        # Get the immediate previous pose from the history
-        if len(self.pose_history) >= 2:
-            previous_rotation, previous_translation = self.pose_history[-2]
-            return previous_rotation, previous_translation
-        else:
-            # Return identity rotation and zero translation if there's no previous pose
-            return np.eye(3), np.zeros((3, 1))
-
-
 def estimate_camera_pose(keypoints2, matches, camera, triangulated_points):
     # Convert keypoints to format needed by solvePnP
     obj_points = []  # 3D world points
@@ -43,7 +19,7 @@ def estimate_camera_pose(keypoints2, matches, camera, triangulated_points):
     # Provide an initial guess for camera pose based on the previous frame
     initial_rvec, initial_tvec = camera.get_previous_pose()
 
-    #retval, rvec, tvec = cv2.solvePnPRansac(obj_points, img_points, camera.camera_matrix, None, rvec=initial_rvec,
+    # retval, rvec, tvec = cv2.solvePnPRansac(obj_points, img_points, camera.camera_matrix, None, rvec=initial_rvec,
     #                                  tvec=initial_tvec, flags=cv2.SOLVEPNP_ITERATIVE)
 
     # Use solvePnP to estimate camera pose

@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="af7951da-f1b2-42d1-9d0d-364f5c42b9ac" name="Changes" comment="trying to make it run for entire video">
-      <change afterPath="$PROJECT_DIR$/src/initialize.py" afterDir="false" />
+    <list default="true" id="af7951da-f1b2-42d1-9d0d-364f5c42b9ac" name="Changes" comment="restarting from feature matching">
+      <change afterPath="$PROJECT_DIR$/src/camera.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/triangulate.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dataloader.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/dataloader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/features.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/features.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/initialize.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/initialize.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/localization.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/localization.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/mapping.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/mapping.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/slam.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/slam.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/visualization.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/visualization.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +59,7 @@
       <option name="presentableId" value="Default" />
       <updated>1696578095677</updated>
       <workItem from="1696578096925" duration="48605000" />
-      <workItem from="1697013439111" duration="41540000" />
+      <workItem from="1697013439111" duration="48085000" />
     </task>
     <task id="LOCAL-00001" summary="I think github has finally realised it can commit slam.py">
       <created>1696578445559</created>
@@ -197,7 +201,14 @@
       <option name="project" value="LOCAL" />
       <updated>1697201714564</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="restarting from feature matching">
+      <created>1697533014685</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1697533014685</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -229,7 +240,8 @@
     <MESSAGE value="started loop" />
     <MESSAGE value="started viz loop" />
     <MESSAGE value="trying to make it run for entire video" />
-    <option name="LAST_COMMIT_MESSAGE" value="trying to make it run for entire video" />
+    <MESSAGE value="restarting from feature matching" />
+    <option name="LAST_COMMIT_MESSAGE" value="restarting from feature matching" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/head_slam$slam.coverage" NAME="slam Coverage Results" MODIFIED="1696854308604" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />

@@ -6,10 +6,10 @@ import cv2
 import yaml
 from dataloader import DatasetLoader
 from mapping import Map
-from localization import Camera
+from camera import Camera
 from visualization import display_image_with_orb_features
 from slam import run_slam
-from test import run_test
+# from test import run_test
 from initialize import initialize
 
 
@@ -17,17 +17,13 @@ def main(dataset_name):
     # Initialize the dataset loader
     dataset_path = os.path.join("../data/", dataset_name)
     loader = DatasetLoader(dataset_path)
-    camera_info = loader.sensor_info
-    resolution = camera_info.get('resolution', [752, 480])
-    rate_hz = camera_info.get('rate_hz', 20)
 
-    # map = Map()
-    # camera = Camera(loader.camera_matrix)
-
-    map, camera = initialize(loader, Map(), Camera(loader.camera_matrix), 3)
-
+    cloud_map = Map()
+    camera = Camera(loader.sensor_info, loader.camera_matrix)
+    cloud_map, camera = initialize(loader, cloud_map, camera, 3)
+    print('initialized')
     # run_test(loader, map, camera)
-    run_slam(loader, map, camera)
+    run_slam(loader, cloud_map, camera)
 
 
 if __name__ == "__main__":

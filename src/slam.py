@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 from localization import estimate_camera_pose
 from features import extract_and_match_features
-from mapping import triangulate_points
+from triangulate import triangulate_points
 from visualization import initialize_windows, display_image_with_orb_features, display_map
 import pygame
 
@@ -26,7 +26,7 @@ def run_slam(loader, map, camera):
         print("Frame: ", run)
         # Load the next frame
         frame = loader.get_next_frame()
-
+        break
         if frame is None:
             break  # End of frames
 

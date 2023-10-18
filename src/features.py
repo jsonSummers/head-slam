@@ -38,3 +38,42 @@ def extract_and_match_features(image1, image2):
     good_matches = [matches[i] for i in range(len(matches)) if mask[i] == 1]
 
     return keypoints1, keypoints2, good_matches
+
+
+def extract_multi_frame_features(images):
+    keypoints_list = []
+    descriptors_list = []
+    for image in images:
+        keypoints, descriptors = extract_orb_features(image)
+        keypoints_list.append(keypoints)
+        descriptors_list.append(descriptors)
+    return keypoints_list, descriptors_list
+
+
+def extract_and_match_features_multi_frame(images):
+    keypoints_list, descriptors_list = extract_multi_frame_features(images)
+    num_frames = len(images)
+    all_matches = []
+
+    matcher = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck=True)
+
+    for i in range(num_frames - 1):
+        for j in range(i + 1, num_frames):
+            descriptors1 = descriptors_list[i]
+            descriptors2 = descriptors_list[j]
+
+            matches = matcher.match(descriptors1, descriptors2)
+            matches = sorted(matches, key=lambda x: x.distance)
+
+            src_pts = np.float32([keypoints_list[i][m.queryIdx].pt for m in matches]).reshape(-1, 1, 2)
+            dst_pts = np.float32([keypoints_list[j][m.trainIdx].pt for m in matches]).reshape(-1, 1, 2)
+
+            # You can adjust the RANSAC parameters (e.g., 3 for the minimum number of points, 0.8 for the maximum
+            # reprojection error).
+            ransac_threshold = 3.0
+            M, mask = cv2.findHomography(src_pts, dst_pts, cv2.RANSAC, ransac_threshold)
+            good_matches = [matches[k] for k in range(len(matches)) if mask[k] == 1]
+
+            all_matches.append((i, j, good_matches))
+
+    return all_matches
